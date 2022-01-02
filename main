@@ -1,0 +1,133 @@
+#include <iostream>
+#include<string>
+#include<conio.h>
+#include<stdlib.h>
+using namespace std;
+void draw();
+void play();
+char the_winner();
+char arr[3][3] = { '1','2','3', 
+                    '4','5','6', 
+                    '7','8','9' };
+char player = 'x';
+int main()
+{
+    cout << "Hello this is first game it is X O game !\n\n";
+
+   for(;the_winner()== 'a';)
+    {
+        draw();
+        play();
+    }
+    draw();
+
+    if (the_winner() == 'x')
+        cout << "player x is winner" << endl;
+    if (the_winner() == 'o')
+        cout << "player o is winner" << endl;
+    if (the_winner() == 'n')
+        cout << "no  player winner" << endl;
+    system("stop");
+
+}
+void draw() {
+    cout << "Hello this is first game it is X O game !\n\n";
+    system("cls");
+    for (int i = 0;i < 3;i++) {
+        for (int j = 0;j < 3;j++)
+        {
+            string space = "\t\t|";
+            cout << space << "     " << arr[i][j];
+        }
+        cout << endl;
+        cout << "\t         -----------------------------------------" << endl;
+
+    }
+}
+void play()
+{
+    char pos;
+    cout << "Enter your move  -- player " << player << endl;
+    cin >> pos;
+    for (int i = 0;i < 3;i++) {
+        for (int j = 0;j < 3;j++)
+        {
+            if (arr[i][j] == pos)
+            {
+                arr[i][j] = player;
+            }
+        }
+    }
+    if (player == 'x')
+    {
+        player = 'o';
+    }
+    else
+    {
+        player = 'x';
+    }
+}
+char the_winner()
+{
+    int no_win = 0;
+    int x_count = 0;
+    int o_count = 0;
+    for (int i = 0;i < 3;i++)
+    {
+        for (int j = 0;j < 3;j++)
+        {
+            if (arr[i][j] != 'x' && arr[i][j] != 'o')
+                no_win++;
+            if (arr[i][j] == 'x')
+            {
+                x_count++;
+            }
+            if (arr[i][j] == 'o')
+            {
+                o_count++;
+            }
+            if (x_count == 3 || o_count == 3)
+            {
+                return x_count > o_count ? 'x' : 'o';
+            }
+        }
+        x_count = 0;
+        o_count = 0;
+    }
+    for (int i = 0;i < 3;i++)
+    {
+        for (int j = 0;j < 3;j++)
+        {
+            if (arr[j][i] == 'x')
+            {
+                x_count++;
+            }
+            if (arr[j][i] == 'o')
+            {
+                o_count++;
+            }
+            if (x_count == 3 || o_count == 3)
+            {
+                return x_count > o_count ? 'x' : 'o';
+            }
+        }
+            x_count = 0;
+            o_count = 0;
+    }
+    if (arr[0][0] == 'x' && arr[1][1] == 'x' && arr[2][2] == 'x')
+        return 'x';
+    else if (arr[0][0] == 'o' && arr[1][1] == 'o' && arr[2][2] == 'o')
+        return 'o';
+    else  if (arr[0][2] == 'x' && arr[1][1] == 'x' && arr[2][0] == 'x')
+        return 'x';
+    else  if (arr[0][2] == 'o' && arr[1][1] == 'o' && arr[2][0] == 'o')
+        return 'o';
+    if (no_win == 0)
+        return 'n';
+    return 'a';
+}
+
+
+
+
+
